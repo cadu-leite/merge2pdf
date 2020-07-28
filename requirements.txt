@@ -1,2 +1,4 @@
 ipython==7.16.1
 xhtml2pdf==0.2.4
+reportlab==3.5.46
+Pillow==7.2.0

@@ -1,7 +1,7 @@
 import unittest
 import datetime
 
-from PyPDF2 import PdfFileReader
+from PyPDF4 import PdfFileReader
 
 # todo: move to PyTest 
 
@@ -43,8 +43,8 @@ class TestClassMerge2Pdf(unittest.TestCase):
     
     def test_merge_pdf_output(self):
         import os 
-        
         image_paths = [
+            'tests/pdf_samples/jpeg_w_350.jpg',
             'tests/pdf_samples/pdf_sample_A Sample PDF_loremIpsum_pages_01.pdf',
             'tests/pdf_samples/pdf_sample_b_pages_01.pdf',
             'tests/pdf_samples/pdf_sample_dummy_w3c_pages_01.pdf',
@@ -55,15 +55,17 @@ class TestClassMerge2Pdf(unittest.TestCase):
             'tests/pdf_samples/pdf_sample_libreoffice_exported_hibrid_format_pages_02.pdf',
             'tests/pdf_samples/pdf_sample_libreoffice_exported_not_hybrid_ISO19005_pages_02.pdf',
             'tests/pdf_samples/pdf_sample_pages_01.pdf',
-            'tests/pdf_samples/pdf_sample_readthedocs_pdf_networkdays_pages_019.pdf',
+            ('tests/pdf_samples/pdf_sample_readthedocs_pdf_networkdays_pages_019.pdf', (0,2)),
             'tests/pdf_samples/pdf_sample_text_edit_macos_pages_01.pdf',
             'tests/pdf_samples/pdf_sample_wikimedia_org_pages_01.pdf',
             'tests/pdf_samples/sample_pdf_commandline_xhtml2pdf_generated_pages_01.pdf',
+            'tests/pdf_samples/issue_repo_pypdf4.pdf',
+            'tests/pdf_samples/issue_repo_pypdf4_test.pdf',
         ]
         m = MergeToPdf(paths_list=image_paths, output_file_path='merged_pdf.pdf')
         m.merge_pdfs()
         generated_pdf = PdfFileReader(open('merged_pdf.pdf', "rb"))
         pages = generated_pdf.getNumPages()
         
-        self.assertEqual(pages, 37)
+        self.assertEqual(pages, 23)
 

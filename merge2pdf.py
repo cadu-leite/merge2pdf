@@ -1,7 +1,14 @@
+from io import BytesIO
+
 from PIL import Image
-from PyPDF2 import PdfFileMerger
-from PyPDF2 import PdfFileReader
-from PyPDF2 import PdfFileWriter 
+from PyPDF4 import PdfFileReader, PdfFileWriter
+from PyPDF4 import PdfFileMerger
+from PyPDF4 import PdfFileReader
+from PyPDF4 import PdfFileWriter
+
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas 
+
 
 class MergeToPdf:
 
@@ -23,6 +30,7 @@ class MergeToPdf:
         
             [
                 ('path_to_file', (pag_start, pag_ends)),  
+                ...
             ]
         to indicade the range of pages of a pdf to be merged
         Args:
@@ -38,16 +46,19 @@ class MergeToPdf:
 
     def merge_pdfs(self):
         '''
-        
+
         '''
         merged_pdf= PdfFileMerger()
         # todo: check file type 
         for file_path in self.paths_list:
             file_name, page_range = self._path_decople_(file_path)
-            if page_range:
-                merged_pdf.append(fileobj = file_name, pages = page_range)
+            if file_name.lower().endswith(('.png', '.jpg', '.jpeg')):
+                merged_pdf.append(fileobj = self._image_to_page_(file_name))
             else:
-                merged_pdf.append(fileobj = file_name)
+                if page_range:
+                    merged_pdf.append(fileobj = file_name, pages = page_range)
+                else:
+                    merged_pdf.append(fileobj = file_name)
 
         # write to outputfile
         output = open(self.output_file_path, 'wb') # output file
@@ -55,7 +66,14 @@ class MergeToPdf:
         output.close() 
         merged_pdf.close()
 
-    def add_watermark(self, watermark_file_path: str):
-        pass
-
-
+    def _image_to_page_(self, image_path):
+        #pdf = PdfFileWriter()
+        # todo: image rotate if H > w
+        imgTemp = BytesIO()
+        imgDoc = canvas.Canvas(imgTemp, pagesize=A4) # todo: param page size
+        imgDoc.drawImage(image_path, 20, 420)  # todo: param margin
+        imgDoc.save()
+        #pdf.addPage(PdfFileReader(BytesIO(imgTemp.getvalue())).getPage(0))
+        #pdf.write(open("output_image.pdf","wb"))
+        # return "output_image.pdf"
+        return PdfFileReader(BytesIO(imgTemp.getvalue()))
