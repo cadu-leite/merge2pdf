@@ -17,22 +17,48 @@ class MergeToPdf:
         A class to merge PDFs files. Pass a lista of File Paths to be merged
 
         Args:
-            paths_list (list): a simples list of paths 
+            paths_list (list): a list of paths(string) ou a lists of tuples like (<path[str]>, <pagerange[tuple(page_ini, page_end)]>
             output_file_path (str, optional): a string defining the outputpath.
         '''
         self.paths_list = paths_list
         self.output_file_path = output_file_path
-    
+
+    def _image_to_page_(self, image_path):
+        '''
+        "draw" a image inside a PDF Page
+        
+        the reason to djust not use PIL was aesthetic, 
+        to have an image inside a real PDF page not just an image converted to PDF
+        
+        todo: an option to rotate the image  if H > w.
+        todo: an option to PDF Page Size
+
+        Args:
+            image_path (str): a path to a bitmap image file, jpeg, gif ...
+
+        Returns:
+            PdfFileReader object: its a PDF file to be merged into the result PDF.
+        '''
+
+        imgTemp = BytesIO()
+        imgDoc = canvas.Canvas(imgTemp, pagesize=A4) # todo: param page size
+        imgDoc.drawImage(image_path, 20, 420)  # todo: param margin
+        imgDoc.save()
+        return PdfFileReader(BytesIO(imgTemp.getvalue()))
+
     def _path_decople_(self, path_list_item)->tuple:
         '''
-        a fucnction to decomple the FILE PATH and Page range 
+        Decomple the file path list into the FILE PATH and Page range ..
+        
         the list could be 
         
             [
                 ('path_to_file', (pag_start, pag_ends)),  
                 ...
             ]
+        
         to indicade the range of pages of a pdf to be merged
+        
         Args:
             path_list_item ([type]): a list os files path
 
@@ -46,10 +72,12 @@ class MergeToPdf:
 
     def merge_pdfs(self):
         '''
+        merge files into a PDF
 
+        # todo: check file type 
         '''
         merged_pdf= PdfFileMerger()
-        # todo: check file type 
+        
         for file_path in self.paths_list:
             file_name, page_range = self._path_decople_(file_path)
             if file_name.lower().endswith(('.png', '.jpg', '.jpeg')):
@@ -66,14 +94,4 @@ class MergeToPdf:
         output.close() 
         merged_pdf.close()
 
-    def _image_to_page_(self, image_path):
-        #pdf = PdfFileWriter()
-        # todo: image rotate if H > w
-        imgTemp = BytesIO()
-        imgDoc = canvas.Canvas(imgTemp, pagesize=A4) # todo: param page size
-        imgDoc.drawImage(image_path, 20, 420)  # todo: param margin
-        imgDoc.save()
-        #pdf.addPage(PdfFileReader(BytesIO(imgTemp.getvalue())).getPage(0))
-        #pdf.write(open("output_image.pdf","wb"))
-        # return "output_image.pdf"
-        return PdfFileReader(BytesIO(imgTemp.getvalue()))
+
