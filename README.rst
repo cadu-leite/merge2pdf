@@ -9,6 +9,10 @@ Networkdays
     :target: https://codecov.io/gh/cadu-leite/networkdays
     :alt: code coverage
 
+.. image:: https://github.com/cadu-leite/merge2pdf/workflows/Python%20application/badge.svg
+    :alt: workflow passed
+
+
 -------------------------------------------
 
 
