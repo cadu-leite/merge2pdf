@@ -3,7 +3,7 @@ import datetime
 
 from PyPDF4 import PdfFileReader
 
-# todo: move to PyTest 
+# todo: move to PyTest
 
 from merge2pdf import MergeToPdf
 
@@ -13,7 +13,7 @@ class TestClassMerge2Pdf(unittest.TestCase):
         '''
         '''
         image_paths = [
-          
+
         ]
         m = MergeToPdf(paths_list=image_paths)
 
@@ -29,7 +29,7 @@ class TestClassMerge2Pdf(unittest.TestCase):
         r = m._path_decople_(image_paths[0])
 
         self.assertEqual(r, tuple(('filepat.pdf', (0,1))), msg='page_range fail' )
-    
+
     def test_decomple_no_page_range(self):
         '''
         '''
@@ -40,9 +40,9 @@ class TestClassMerge2Pdf(unittest.TestCase):
         r = m._path_decople_(image_paths[0])
 
         self.assertEqual(r, tuple(('filepath.pdf', None)))
-    
+
     def test_merge_pdf_output(self):
-        import os 
+        import os
         image_paths = [
             'tests/pdf_samples/jpeg_w_350.jpg',
             'tests/pdf_samples/pdf_sample_A Sample PDF_loremIpsum_pages_01.pdf',
@@ -62,10 +62,10 @@ class TestClassMerge2Pdf(unittest.TestCase):
             'tests/pdf_samples/issue_repo_pypdf4.pdf',
             'tests/pdf_samples/issue_repo_pypdf4_test.pdf',
         ]
-        m = MergeToPdf(paths_list=image_paths, output_file_path='merged_pdf.pdf')
+        m = MergeToPdf(paths_list=image_paths, output_file_path='test_merged_pdf.pdf')
         m.merge_pdfs()
-        generated_pdf = PdfFileReader(open('merged_pdf.pdf', "rb"))
+        generated_pdf = PdfFileReader(open('test_merged_pdf.pdf', "rb"))
         pages = generated_pdf.getNumPages()
-        
+
         self.assertEqual(pages, 23)
 
