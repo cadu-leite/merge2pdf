@@ -1,6 +1,5 @@
 from io import BytesIO
 
-from PIL import Image
 from PyPDF4 import PdfFileReader, PdfFileWriter
 from PyPDF4 import PdfFileMerger
 from PyPDF4 import PdfFileReader
@@ -94,5 +93,4 @@ class MergeToPdf:
         merged_pdf.write(output)  # write merge content to file
         output.close()
         merged_pdf.close()
-
 
