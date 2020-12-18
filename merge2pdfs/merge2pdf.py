@@ -93,4 +93,3 @@ class MergeToPdf:
         merged_pdf.write(output)  # write merge content to file
         output.close()
         merged_pdf.close()
-

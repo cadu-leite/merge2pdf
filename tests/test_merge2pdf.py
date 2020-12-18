@@ -2,9 +2,7 @@ import unittest
 
 from PyPDF4 import PdfFileReader
 
-# todo: move to PyTest
-
-from merge2pdf import MergeToPdf
+from merge2pdfs.merge2pdf import MergeToPdf
 
 class TestClassMerge2Pdf(unittest.TestCase):
 
