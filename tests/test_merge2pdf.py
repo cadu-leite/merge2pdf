@@ -75,8 +75,9 @@ class TestClassMerge2Pdf(unittest.TestCase):
         ]
         m = MergeToPdf(paths_list=image_paths, output_file_path='test_merged_pdf.pdf')
         m.merge_pdfs()
-        generated_pdf = PdfFileReader(open('test_merged_pdf.pdf', "rb"))
-        pages = generated_pdf.getNumPages()
+        with open('test_merged_pdf.pdf', "rb") as outputfile:
+            generated_pdf = PdfFileReader(outputfile)
+            pages = generated_pdf.getNumPages()
 
-        self.assertEqual(pages, 23)
+            self.assertEqual(pages, 23)
 
