@@ -2,13 +2,9 @@ from io import BytesIO
 
 from PyPDF4 import PdfFileReader, PdfFileWriter
 from PyPDF4 import PdfFileMerger
-from PyPDF4 import PdfFileReader
-from PyPDF4 import PdfFileWriter
 
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
-
-from collections import Iterable
 
 
 class CommandError(Exception):
