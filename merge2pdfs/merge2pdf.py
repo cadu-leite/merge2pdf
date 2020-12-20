@@ -8,6 +8,17 @@ from PyPDF4 import PdfFileWriter
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 
+from collections import Iterable
+
+
+class CommandError(Exception):
+    """
+    """
+
+    def __init__(self, *args, returncode=1, **kwargs):
+        self.returncode = returncode
+        super().__init__(*args, **kwargs)
+
 
 class MergeToPdf:
 
@@ -20,6 +31,9 @@ class MergeToPdf:
                       like (<path[str]>, <pagerange[tuple(page_ini, page_end)]>
             output_file_path (str, optional): a string defining the outputpath.
         '''
+        if not isinstance(paths_list, list):
+            raise CommandError('Its not a list')
+
         self.paths_list = paths_list
         self.output_file_path = output_file_path
 

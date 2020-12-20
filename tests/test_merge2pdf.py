@@ -3,6 +3,19 @@ import unittest
 from PyPDF4 import PdfFileReader
 
 from merge2pdfs.merge2pdf import MergeToPdf
+from merge2pdfs.merge2pdf import CommandError
+
+
+class TestClassMerge2PdfParams(unittest.TestCase):
+
+    def test_recieve_a_list_to_iter_on(self):
+        '''
+        assert if raise an custom error when path list not a list
+        there is no sense to call if you dont have 2 files to merge
+        after all
+        '''
+        with self.assertRaises(CommandError):
+            MergeToPdf(paths_list=None)
 
 class TestClassMerge2Pdf(unittest.TestCase):
 
