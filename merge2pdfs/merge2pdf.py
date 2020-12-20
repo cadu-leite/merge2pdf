@@ -89,6 +89,7 @@ class MergeToPdf:
         merged_pdf = PdfFileMerger()
 
         for file_path in self.paths_list:
+
             file_name, page_range = self._path_decople_(file_path)
             if file_name.lower().endswith(('.png', '.jpg', '.jpeg')):
                 merged_pdf.append(fileobj=self._image_to_page_(file_name))

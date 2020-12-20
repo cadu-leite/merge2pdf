@@ -4,6 +4,21 @@ from PyPDF4 import PdfFileReader
 
 from merge2pdfs.merge2pdf import MergeToPdf
 from merge2pdfs.merge2pdf import CommandError
+from merge2pdfs import __main__
+
+class TestClassMerge2PdfShellArgs(unittest.TestCase):
+
+    def test_list_files(self):
+        args = __main__.command_line_parser(['-f', 'requirements.txt', 'requirements-dev.txt'])
+        self.assertEqual(args.filespath, ['requirements.txt', 'requirements-dev.txt'])
+
+    def test_arg_outputfile(self):
+        args = __main__.command_line_parser(['-f', 'requirements.txt', 'requirements-dev.txt'])
+        self.assertEqual(args.output, 'merged_pdfs.pdf')
+
+    def test_arg_other_outputfile(self):
+        args = __main__.command_line_parser(['-o', 'outrooutput.pdf'])
+        self.assertEqual(args.output, 'outrooutput.pdf')
 
 
 class TestClassMerge2PdfParams(unittest.TestCase):
