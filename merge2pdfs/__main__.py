@@ -6,9 +6,7 @@ DESCRIPTION = '''
     Merge files into one pdf file.
 '''
 
-
 def command_line_parser(sys_args):
-    print(f'sys args:{sys_args}')
     parser = argparse.ArgumentParser(description=DESCRIPTION)
     parser.add_argument(
         '-o', '--output',
@@ -32,5 +30,4 @@ def main(args):
 
 if __name__ == '__main__':
     args = command_line_parser(sys.argv[1:])
-    print(f'args: {args}')
     main(args)
