@@ -18,9 +18,9 @@ Merge2pdf is capable to add a watermark to all pages as well.
 Its possible to use **merge2pdf** on command line as an application, or as  part of your code as a Python lib. 
 
 +-------------------+---------------+--------------------+-------------+---------------------+
-| Pypi Version      | Doc Status    | Coverage           | Test        | Downloads           |
+| Pypi Version      | Doc Status    | Test Status        | Workflow    | Downloads           |
 +===================+===============+====================+=============+=====================+
-|  not built yet    |  no docs yet  |  |badge_coverage|  |  |workflow| |  |badge_downloads|  |
+|  Not built yet    |  no docs yet  |  |badge_coverage|  |  |workflow| |  Not on Pypi yet    |
 +-------------------+---------------+--------------------+-------------+---------------------+
 
 
