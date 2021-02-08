@@ -31,14 +31,13 @@ Imagine you have to put together a bunch of files that is part of a collection o
 
 This lib will help you to do that with a better looking and control. 
 
-- Images are fit inside a PDF page as images.
+- Images are fit inside a PDF page as proper images.
 - Documents may be merged partially - Its possible to specify which pages of each document will be merged.
 - Its possible to add a watermark on every page.
 
 The images are merged using `reportlab canvas`.
 
-*if you have a better solution, or you can manage it to have less dependencies drop a comments or issue* ;) 
-
+    if you have a better solution, or you can manage it to have less dependencies let me know - open an issue at `merge2pdf repository`_ ;) 
 
 
 Dependencies
@@ -56,7 +55,25 @@ How to use it
 How to use it in shell
 ----------------------
 
-... todo    
+Parameters
+^^^^^^^^^^
+
+usage: python -m merge2pdfs [-h] [-o OUTPUT] [-f FILESPATH [FILESPATH ...]]
+
+optional arguments:
+    -h, --help   show this help message and exit
+    -o OUTPUT, --output OUTPUT    Path and name to the outputfile
+    -f FILESPATH, --filespath   [FILESPATH ...] list of files to merge (images and PDF)
+    
+
+Exemplo:
+
+
+.. code-block:: bash
+
+    # merge 2 Files on `tests/pdf_samples/`
+    $> python -m merge2pdfs -f tests/pdf_samples/pdf_sample_b_pages_01.pdf tests/pdf_samples/pdf_sample_wikimedia_org_pages_01.pdf
+
 
 
 How to use it as a lib in your code
@@ -87,9 +104,7 @@ How to use it as a lib in your code
 Contributing
 ============
 
-    Feel free to participate the way you can. 
-
-    Its OpenSource and any contribution is welcome.
+Feel free to participate the way you can.  Its "open source" and any contribution is always welcome! really 
 
 - Give some feedbacks
     + how you use it
@@ -97,6 +112,7 @@ Contributing
 - You may point errors the best way you can, on the repository
 - Send some code the way you can (Don't think to much, just sent it!)
 
+this project is hosted at github - `merge2pdf repository`_
 
 -------------------------------------------------------------------------------
 
@@ -115,7 +131,4 @@ Descrição (pt_BR):
     :alt: workflow
 
 
-
-
-
-
+.. _merge2pdf repository: http://https://github.com/cadu-leite/merge2pdf 
